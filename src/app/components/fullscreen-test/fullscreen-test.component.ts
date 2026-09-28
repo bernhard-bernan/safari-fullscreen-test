@@ -1,9 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  ViewChild
-} from '@angular/core';
+import { Component } from '@angular/core';
 
 interface InteractionLog {
   action: string;
@@ -18,10 +13,8 @@ interface InteractionLog {
 })
 export class FullscreenTestComponent {
 
-  @ViewChild('fullscreenDiv')
-  fullscreenDiv!: ElementRef<HTMLElement>;
-
-  public isFullscreen = false;
+  
+  public testStarted = false;
 
   public currentQuestion: 'A' | 'B' = 'A';
 
@@ -38,26 +31,6 @@ export class FullscreenTestComponent {
   public interactionLog: InteractionLog[] = [];
 
   private lastInteractionTimestamp: number | null = null;
-
-  public async toggleFullscreen(): Promise<void> {
-    const element = this.fullscreenDiv.nativeElement;
-
-    if (!document.fullscreenElement) {
-      try {
-        await element.requestFullscreen();
-      } catch (error) {
-        console.warn('Fullscreen request failed:', error);
-      }
-
-      return;
-    }
-
-    try {
-      await document.exitFullscreen();
-    } catch (error) {
-      console.warn('Exit fullscreen failed:', error);
-    }
-  }
 
   public onInteraction(action: string): void {
     const timestamp = performance.now();
@@ -136,8 +109,9 @@ export class FullscreenTestComponent {
     this.averageInterval = total / intervals.length;
   }
 
-  @HostListener('document:fullscreenchange')
-  public onFullscreenChange(): void {
-    this.isFullscreen = !!document.fullscreenElement;
+  public startTest(): void {
+    this.testStarted = true;
+    this.resetTest();
   }
+
 }
