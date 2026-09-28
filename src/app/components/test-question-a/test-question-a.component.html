@@ -1,0 +1,38 @@
+<div class="question">
+
+  <h2>Question A — DIV with touchend only</h2>
+
+  <div
+    class="combined-button"
+    (touchend)="testTouch($event)">
+
+    <span class="button-section">
+      Area A1
+    </span>
+
+    <span class="button-section">
+      Area A2
+    </span>
+
+    <span class="button-section">
+      Area A3
+    </span>
+
+  </div>
+
+  <div>
+    Touches: {{ clickCount }}
+  </div>
+
+  <div>
+    Last area: {{ lastArea }}
+  </div>
+
+  <button
+    type="button"
+    class="next-button"
+    (click)="nextQuestion()">
+    Nākamais jautājums
+  </button>
+
+</div>

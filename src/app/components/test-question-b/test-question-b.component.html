@@ -1,0 +1,33 @@
+<div class="question">
+
+  <h2>Question B</h2>
+
+  <button
+    type="button"
+    (click)="testClick('B1')">
+    Button B1
+  </button>
+
+  <button
+    type="button"
+    (click)="testClick('B2')">
+    Button B2
+  </button>
+
+  <button
+    type="button"
+    (click)="testClick('B3')">
+    Button B3
+  </button>
+
+  <div>
+    Clicks: {{ clickCount }}
+  </div>
+
+  <button
+    type="button"
+    (click)="nextQuestion()">
+    Nākamais jautājums
+  </button>
+
+</div>

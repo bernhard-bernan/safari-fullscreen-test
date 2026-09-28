@@ -1,0 +1,143 @@
+<div
+  #fullscreenDiv
+  class="fullscreen-container">
+
+  <!-- Before fullscreen -->
+  <div
+    *ngIf="!isFullscreen"
+    class="go-fullscreen-button-container">
+
+    <button
+      type="button"
+      class="fullscreen-button"
+      (click)="toggleFullscreen()">
+      Atsākt testu
+    </button>
+
+  </div>
+
+  <!-- Fullscreen -->
+  <div
+    *ngIf="isFullscreen"
+    class="fullscreen-content">
+
+    <div class="status">
+
+      <div>
+        Current question:
+        <strong>{{ currentQuestion }}</strong>
+      </div>
+
+      <div>
+        Total interactions:
+        <strong>{{ totalInteractions }}</strong>
+      </div>
+
+      <div>
+        Question changes:
+        <strong>{{ questionChanges }}</strong>
+      </div>
+
+      <div>
+        Last interval:
+        <strong>
+          {{ lastInterval !== null
+            ? (lastInterval | number:'1.0-0') + ' ms'
+            : '-' }}
+        </strong>
+      </div>
+
+      <div>
+        Fastest interval:
+        <strong>
+          {{ fastestInterval !== null
+            ? (fastestInterval | number:'1.0-0') + ' ms'
+            : '-' }}
+        </strong>
+      </div>
+
+      <div>
+        Average interval:
+        <strong>
+          {{ averageInterval !== null
+            ? (averageInterval | number:'1.0-0') + ' ms'
+            : '-' }}
+        </strong>
+      </div>
+
+    </div>
+
+    <!-- Question A -->
+    <app-test-question-a
+      *ngIf="currentQuestion === 'A'"
+      (interaction)="onInteraction($event)"
+      (completed)="onQuestionCompleted()">
+    </app-test-question-a>
+
+    <!-- Question B -->
+    <app-test-question-b
+      *ngIf="currentQuestion === 'B'"
+      (interaction)="onInteraction($event)"
+      (completed)="onQuestionCompleted()">
+    </app-test-question-b>
+
+    <div class="actions">
+
+      <button
+        type="button"
+        (click)="resetTest()">
+        Reset test
+      </button>
+
+      <button
+        type="button"
+        (click)="toggleFullscreen()">
+        Exit Fullscreen
+      </button>
+
+    </div>
+
+    <div class="event-log">
+
+      <h3>Recent interactions</h3>
+
+      <table>
+
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Action</th>
+          <th>Interval</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr
+          *ngFor="let item of interactionLog; let i = index">
+
+          <td>
+            {{ totalInteractions - i }}
+          </td>
+
+          <td>
+            {{ item.action }}
+          </td>
+
+          <td>
+            {{ item.interval !== null
+              ? (item.interval | number:'1.0-0') + ' ms'
+              : '-' }}
+          </td>
+
+        </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
