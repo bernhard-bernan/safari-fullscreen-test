@@ -1,0 +1,9 @@
+{
+  "name": "PWA Gesture Test",
+  "short_name": "PWA Test",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff"
+}
