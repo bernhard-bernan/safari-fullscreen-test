@@ -22,6 +22,8 @@
 
   overflow: hidden;
   background: white;
+
+  touch-action: pan-x pan-y;
 }
 
 .status {
